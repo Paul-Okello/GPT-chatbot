@@ -94,7 +94,7 @@ export default function Navbar() {
                             className='cursor-pointer flex justify-center items-center'
                         >
                             <Avatar src={session.user?.image as string} size={"sm"} />
-                            <Text className='text-base'>{session.user?.name as string}</Text>
+                            <Text className='text-base text-white'>{session.user?.name as string}</Text>
                             <Button
                                 variant={"solid"}
                                 onClick={() => {
@@ -104,6 +104,7 @@ export default function Navbar() {
                                     }
                                 }}
                                 colorScheme='gray'
+                                className='text-white'
                             >
                                 Sign Out
                             </Button>
