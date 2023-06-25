@@ -99,7 +99,7 @@ export default function Navbar() {
                                 variant={"solid"}
                                 onClick={() => {
                                     handleLogout()
-                                    if (pathname === "/vicky") {
+                                    if (pathname === "/vicky" || pathname.includes("api/auth/")) {
                                         router.push("/");
                                     }
                                 }}
