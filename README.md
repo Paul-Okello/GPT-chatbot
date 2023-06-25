@@ -1,34 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# GPT Personal Assistant
+
+VICKY is an Artificial Intelligence personal assistant aimed at improving mental health and professional development. This project is built using Next.js 13, Redux for state management, Chakra UI for React components, and Tailwind CSS for utility CSS classes. It also utilizes the OpenAI Chat Completion API for generating prompts.
+
+## Features
+
+- AI-powered personal assistant for mental health and professional development
+- Chat interface for interacting with VICKY
+- State management with Redux
+- Responsive UI design with Chakra UI and Tailwind CSS
+
+## Prerequisites
+
+Before running the project, make sure you have the following environment variables set:
+
+- `OPEN_AI_API_KEY`: Your OpenAI API key for accessing the Chat Completion API.
+- `NEXTAUTH_SECRET`: Secret key for NextAuth authentication.
+- `NEXT_PUBLIC_SPEECHLY_APP_ID`: Speechly app ID for voice input .
+- `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: Google OAuth client ID and secret for authentication .
 
 ## Getting Started
 
-First, run the development server:
+To run the VICKY project locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   git clone https://github.com/Paul-Okello/GPT-chatbot.git
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Navigate to the project directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   cd vicky-project
+   ```
 
-## Learn More
+3. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Set up the required environment variables by creating a `.env` file in the root directory of the project and adding the necessary values:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```plaintext
+   OPEN_AI_API_KEY=<your-openai-api-key>
+   NEXTAUTH_SECRET=<your-nextauth-secret>
+   NEXT_PUBLIC_SPEECHLY_APP_ID=<your-speechly-app-id>
+   GOOGLE_CLIENT_ID=<your-google-client-id>
+   GOOGLE_CLIENT_SECRET=<your-google-client-secret>
+   ```
 
-## Deploy on Vercel
+5. Start the development server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. Open your web browser and access the project at `http://localhost:3000`.
+
+## Usage
+
+Once the project is running, you can interact with VICKY through the chat interface. You can ask questions, seek advice, or have general conversations to improve your mental health and professional development.
+
+VICKY will provide responses based on the AI models and prompts used in the project. Feel free to experiment and explore different topics and prompts to get personalized assistance.
+
+## Feedback and Contributions
+
+We welcome any feedback or contributions to enhance the VICKY project. If you encounter any issues or have suggestions for improvement, please open an issue on the GitHub repository.
+
+We hope that VICKY will be a helpful companion on your journey towards improved mental health and professional growth.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
