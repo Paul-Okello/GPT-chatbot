@@ -79,7 +79,7 @@ export default function Navbar() {
                     />
                 </Flex>
                 <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                    <Text>Vicky AI</Text>
+                    <Text className='text-zinc-100'>Vicky AI</Text>
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                         <DesktopNav />
                     </Flex>

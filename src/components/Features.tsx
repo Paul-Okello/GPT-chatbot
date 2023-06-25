@@ -48,7 +48,7 @@ export default function Features() {
                         fontWeight={600}
                         fontSize={'sm'}
                         // bg={useColorModeValue('purple.700', 'purple.900')}
-                        className='bg-[#684184] hover:bg-[#705b7e] cursor-pointer'
+                        className='bg-[#684184] hover:bg-[#705b7e] cursor-pointer text-white'
                         p={2}
                         alignSelf={'flex-start'}
                         rounded={'md'}
@@ -87,17 +87,17 @@ export default function Features() {
                         professional growth merge into a path of self-discovery towards a full
                         and balanced life.
                     </Text>
-                    <div className='flex justify-start items-center rounded-full w-full mt-5'>
+                    {/* <div className='flex justify-start items-center rounded-full w-full mt-5'>
                         <Link href={"/vicky"}>
                             <Button
                                 variant='solid'
                                 size='sm'
-                                className='bg-[#684184] hover:bg-[#705b7e] text-base'>
+                                className='bg-[#684184] hover:bg-[#705b7e] text-base text-white'>
                                 JOIN US AND START LIVING
                                 LIFE TODAY!
                             </Button>
                         </Link>
-                    </div>
+                    </div> */}
                 </Stack>
                 <Flex>
                     <Image

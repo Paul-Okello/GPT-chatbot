@@ -81,7 +81,7 @@ function Hero() {
                                     }}
                                     variant='solid'
                                     size='lg'
-                                    className='bg-[#684184] hover:bg-[#705b7e]'>
+                                    className='bg-[#684184] hover:bg-[#705b7e] text-white'>
                                     Start now
                                 </Button>
                             </Link>
@@ -92,7 +92,7 @@ function Hero() {
                             }}
                             variant='solid'
                             size='lg'
-                            className='bg-[#684184] hover:bg-[#705b7e]'>
+                            className='bg-[#684184] hover:bg-[#705b7e] text-white'>
                             Sign in to start now
                         </Button>)}
 
