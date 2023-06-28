@@ -5,12 +5,20 @@ import { Button } from '@chakra-ui/react';
 import { SegmentItem } from './SegmentItem';
 import Image from 'next/image';
 import { Text } from '@rewind-ui/core';
+import Talkify from './Talkify';
 
 export default function TextToSpeech() {
     const { segment, listening, attachMicrophone, start, stop } = useSpeechContext();
     type SegmentProps = typeof segment
     const [transcripts, setTranscripts] = useState<SegmentProps[]>([])
     const [tentative, setTentative] = useState<string>('')
+
+    const instructions = [
+        "To engage with Vicky AI, make sure your microphone is activated.",
+        "Initiate the conversation by saying 'hi Vicky.'",
+        "When you're finished, remember to close the microphone."
+    ];
+
 
     const handleClick = async () => {
         if (listening) {
@@ -65,9 +73,22 @@ export default function TextToSpeech() {
                     }
                 </Button>
             </div>
-            <div className="text-center">
-                <Text weight="light">Ensure you switch off the microphone once you are done to capture your speech</Text>
-            </div>
+            <ol className="">
+                <Text className='my-2'
+                    color="black"
+                    leading="loose"
+                    size="lg"
+                    tracking="tight"
+                    weight="semiBold"
+                >
+                    Instructions
+                </Text>
+                {instructions.map((instruction, index) => (
+                    <li className="" key={index}>
+                        <Text weight="normal">{instruction}</Text>
+                    </li>
+                ))}
+            </ol>
         </div>
     )
 }
