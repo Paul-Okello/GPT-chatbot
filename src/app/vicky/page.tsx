@@ -1,18 +1,30 @@
 "use client"
 
-import { Card } from '@rewind-ui/core';
-import { TextToSpeech } from "@/components";
-import Image from "next/image";
-import { useSession } from "next-auth/react";
-import { Text, Ribbon } from '@rewind-ui/core';
-import { useSpeechContext } from '@speechly/react-client';
+import { Talkify, TextToSpeech } from "@/components";
+import { populateVoiceList, sayInput } from '@/lib/voiceUtils';
 import { useAppSelector } from '@/redux/hooks';
+import { Button, ButtonGroup } from '@chakra-ui/react';
+import { Card, Ribbon, Select, Text } from '@rewind-ui/core';
+import { useSpeechContext } from '@speechly/react-client';
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useEffect, useState } from 'react';
 import { RotateLoader } from 'react-spinners';
 
 export default function Vicky() {
     const { data: session, status } = useSession()
+    const [selectedLanguage, setSelectedLanguage] = useState('en-US');
     const { listening } = useSpeechContext();
     const contentData = useAppSelector((state) => state.content);
+
+    useEffect(() => {
+        populateVoiceList();
+    }, []);
+
+    const handleSubmit = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        contentData.content && sayInput(contentData.content, selectedLanguage);
+    };
     return (
         <div className="bg-slate-100 min-h-screen">
             <main className="max-w-7xl mx-auto py-6">
@@ -47,9 +59,10 @@ export default function Vicky() {
                             <Ribbon color={`${listening ? "purple" : "gray"}`} radius="md" shadow="none">
                                 {listening ? "Listening" : "Not Listening"}
                             </Ribbon>
-                            <Text variant="h3">Try out Vicky</Text>
+                            <Text variant="d4">VICKY</Text>
                         </Card.Header>
                         <Card.Body>
+                            <Talkify />
                             <TextToSpeech />
                         </Card.Body>
                     </Card>
@@ -74,8 +87,62 @@ export default function Vicky() {
                                 </div>
                             ) : (
                                 <Card bordered={false} radius="none" shadow="none" withDivider={false} size="sm">
+                                    <Card.Header className='flex justify-between items-center'>
+                                        <div className="w-44 flex justify-center items-center">
+                                            <Text color="purple" leading="snug" tracking="tight" weight="semiBold">Select Voice</Text>
+                                            <Select
+                                                withRing={false}
+                                                color="purple"
+                                                radius="lg"
+                                                shadow="base"
+                                                tone="solid"
+                                                onChange={(event) => setSelectedLanguage(event.target.value)}
+                                                value={selectedLanguage}
+                                                size="sm"
+                                                className='cursor-pointer'
+                                            >
+                                                <option value="en-US">English</option>
+                                                <option value="es-US">Spanish</option>
+                                                <option value="fr-FR">French</option>
+                                            </Select>
+                                        </div>
+                                        <ButtonGroup
+                                            aria-label='Talkify Controls'
+                                            size='sm'
+                                            isAttached
+                                            variant="solid"
+                                            my={3}
+                                            bg={"gray.100"}
+                                            rounded={"md"}
+                                        >
+                                            <Button
+                                                onClick={handleSubmit}
+                                                colorScheme='purple'
+                                            >
+                                                Talk to me
+                                            </Button>
+                                            <Button
+                                                colorScheme='yellow'
+                                                onClick={() => window.speechSynthesis.pause()}
+                                            >
+                                                Pause
+                                            </Button>
+                                            <Button
+                                                colorScheme='whatsapp'
+                                                onClick={() => window.speechSynthesis.resume()}
+                                            >
+                                                Resume
+                                            </Button>
+                                            <Button
+                                                colorScheme='red'
+                                                onClick={() => window.speechSynthesis.cancel()}
+                                            >
+                                                Stop
+                                            </Button>
+                                        </ButtonGroup>
+                                    </Card.Header>
                                     <Card.Body>
-                                        <Text variant="p" weight="medium" className="text-slate-900/80" leading="relaxed">
+                                        <Text size="lg" tracking="tight" className='text-slate-800/90'>
                                             {contentData.content}
                                         </Text>
                                     </Card.Body>

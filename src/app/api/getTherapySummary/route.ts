@@ -12,7 +12,7 @@ export async function POST(request: Request) {
         messages: [
             {
                 role: "system",
-                content: "As a lively and competent mental health expert, inform users with actionable insights."
+                content: "As a lively and competent mental health expert, inform users with actionable insights and give the response in spanish."
             },
             {
                 role: "user",
