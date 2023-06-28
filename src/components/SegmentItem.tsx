@@ -13,7 +13,7 @@ interface Props {
     segment: SpeechSegment;
 }
 
-interface GPTResponse {
+export interface GPTResponse {
     role?: string;
     content?: string;
 }
