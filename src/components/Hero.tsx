@@ -61,6 +61,14 @@ function Hero() {
                         <Heading
                             lineHeight={1.1}
                             fontWeight={600}
+                            mb={"4"}
+                            className='bg-gradient-to-r from-purple-700 via-purple-800 to-purple-700 bg-clip-text text-transparent'
+                            fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}>
+                            Meet Vicky...
+                        </Heading>
+                        <Heading
+                            lineHeight={1.1}
+                            fontWeight={600}
                             mb={4}
                             fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
                             className='text-slate-800'>

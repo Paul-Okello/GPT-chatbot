@@ -80,30 +80,27 @@ export default function Footer() {
                 <Text>Vicky AI</Text>
             </Container>
             <Box>
-                <Container
-                    as={Stack}
-                    maxW={'6xl'}
-                    py={4}
-                    direction={{ base: 'column', md: 'row' }}
-                    spacing={4}
-                    justify={{ base: 'center', md: 'space-between' }}
-                    align={{ base: 'center', md: 'center' }}>
+                <div
+                    className='max-w-6xl flex flex-col md:flex-row justify-center md:justify-between items-center py-4'
+                >
                     <Text>© {new Date().getFullYear()}. All rights reserved</Text>
-                    <Stack direction={'row'} spacing={6}>
-                        <div className="flex justify-between items-center">
+                    <div
+                        className='flex flex-col md:flex-row justify-center items-center'
+                    >
+                        <div className="flex justify-between items-center my-1">
                             <EnvelopeIcon className='h-5 w-5 mx-2' />
                             <Text>soy@simplelifeofficial.com</Text>
                         </div>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center my-1">
                             <PhoneIcon className='h-5 w-5 mx-2' />
                             <Text>+51 980 354 269</Text>
                         </div>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center my-1">
                             <GlobeAltIcon className='h-5 w-5 mx-2' />
                             <Text>www.vickyhola.com</Text>
                         </div>
-                    </Stack>
-                </Container>
+                    </div>
+                </div>
             </Box>
         </Box>
     );
