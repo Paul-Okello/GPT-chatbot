@@ -69,7 +69,7 @@ export default function Vicky() {
                         </div>
                         <div className="absolute bottom-4 right-3 hover:rotate-1 duration-500 cursor-pointer transition-all ease-in-out w-1/5">
                             <Image
-                                src="/assets/pale-mental-health.svg"
+                                src="/assets/poor.jpeg"
                                 width={200}
                                 className="hidden lg:block"
                                 height={350}

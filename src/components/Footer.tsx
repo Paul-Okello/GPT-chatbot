@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { ReactNode } from 'react';
+import { EnvelopeIcon, GlobeAltIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
 const Logo = (props: any) => {
     return (
@@ -77,14 +78,7 @@ export default function Footer() {
                 align={'center'}>
 
                 <Text>Vicky AI</Text>
-                <Stack direction={'row'} spacing={6}>
-                    <Link href={'#'}>Home</Link>
-                    <Link href={'#'}>About</Link>
-                    <Link href={'#'}>Blog</Link>
-                    <Link href={'#'}>Contact</Link>
-                </Stack>
             </Container>
-
             <Box>
                 <Container
                     as={Stack}
@@ -96,18 +90,22 @@ export default function Footer() {
                     align={{ base: 'center', md: 'center' }}>
                     <Text>© {new Date().getFullYear()}. All rights reserved</Text>
                     <Stack direction={'row'} spacing={6}>
-                        <SocialButton label={'Twitter'} href={'#'}>
-                            <FaTwitter />
-                        </SocialButton>
-                        <SocialButton label={'YouTube'} href={'#'}>
-                            <FaYoutube />
-                        </SocialButton>
-                        <SocialButton label={'Instagram'} href={'#'}>
-                            <FaInstagram />
-                        </SocialButton>
+                        <div className="flex justify-between items-center">
+                            <EnvelopeIcon className='h-5 w-5 mx-2' />
+                            <Text>soy@simplelifeofficial.com</Text>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <PhoneIcon className='h-5 w-5 mx-2' />
+                            <Text>+51 980 354 269</Text>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <GlobeAltIcon className='h-5 w-5 mx-2' />
+                            <Text>www.vickyhola.com</Text>
+                        </div>
                     </Stack>
                 </Container>
             </Box>
         </Box>
     );
 }
+
