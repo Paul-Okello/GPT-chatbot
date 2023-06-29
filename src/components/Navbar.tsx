@@ -16,6 +16,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import { useSession, signIn, signOut } from 'next-auth/react';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -94,7 +95,7 @@ export default function Navbar() {
                     />
                 </Flex>
                 <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                    <Text className='text-zinc-100'>Vicky AI</Text>
+                    <Image src='/icons/logo.svg' width={80} height={80} alt="Logo" />
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                         <DesktopNav />
                     </Flex>
@@ -225,7 +226,6 @@ const MobileNav = () => {
 };
 
 const MobileNavItem = ({ label, href }: NavItem) => {
-
     return (
         <Stack spacing={2}>
             <Flex
