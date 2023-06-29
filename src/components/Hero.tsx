@@ -29,6 +29,7 @@ function Hero() {
     const router = useRouter();
     const { status } = useSession()
 
+
     async function handleLogin() {
         await signIn()
         chakraToast({

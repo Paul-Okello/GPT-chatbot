@@ -17,6 +17,7 @@ import {
 import { motion } from "framer-motion";
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
@@ -24,6 +25,20 @@ export default function Navbar() {
     const chakraToast = useToast()
     const router = useRouter();
     const pathname = usePathname()
+
+    useEffect(() => {
+        if (status === "authenticated" && pathname === "/") {
+            chakraToast({
+                title: "Logged in",
+                description: "You are being redirected to Vicky",
+                status: "success",
+                duration: 6000,
+                isClosable: true,
+                position: "top-right"
+            })
+            router.push("/vicky")
+        }
+    })
 
     async function handleLogin() {
         await signIn()
@@ -88,7 +103,7 @@ export default function Navbar() {
                     flex={{ base: 1, md: 0 }}
                     justify={'flex-end'}
                     direction={'row'}
-                    spacing={3}>
+                    spacing={2}>
                     {status === "authenticated" ? (
                         <div
                             className='cursor-pointer flex justify-center items-center'
@@ -212,7 +227,7 @@ const MobileNav = () => {
 const MobileNavItem = ({ label, href }: NavItem) => {
 
     return (
-        <Stack spacing={4}>
+        <Stack spacing={2}>
             <Flex
                 py={2}
                 as={Link}

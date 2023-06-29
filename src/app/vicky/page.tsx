@@ -4,6 +4,7 @@ import { Talkify, TextToSpeech } from "@/components";
 import { populateVoiceList, sayInput } from '@/lib/voiceUtils';
 import { useAppSelector } from '@/redux/hooks';
 import { Button, ButtonGroup } from '@chakra-ui/react';
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { Card, Ribbon, Select, Text } from '@rewind-ui/core';
 import { useSpeechContext } from '@speechly/react-client';
 import { useSession } from "next-auth/react";
@@ -11,6 +12,20 @@ import Image from "next/image";
 import { useEffect, useState } from 'react';
 import { RotateLoader } from 'react-spinners';
 
+const textArray = [
+    "Imagine having an emotional conflict and being cared for by renowned figures such as Freud, Lacan, Pinker, Jung, Ekman, or Maslow.",
+    "Envision meaningful conversations about the purpose and meaning of your life with philosophers like Nietzsche, Heidegger, Plato, or even Socrates.",
+    "Discover techniques to raise your children and strengthen your relationships.",
+    "Picture having a coach to help you materialize your projects.",
+    "Visualize a trusted friend to whom you can reveal your deepest secrets, a friend who never judges, criticizes, but instead encourages you to be your best self and provides precise advice to achieve your goals.",
+    "Vicky is all of this and much more.",
+    "Vicky is the first Spanish-speaking Artificial Intelligence assistant trained in over 380 techniques and tools for human therapeutic, coaching, and counseling support.",
+    "Designed to protect and safeguard your information with absolute confidentiality, Vicky becomes more accurate and helpful as she learns from you.",
+    "You can interact with Vicky through text, voice, and video.",
+    "Most importantly, she recognizes ethical boundaries, knowing when an issue requires the expertise of a human hand and guiding you towards it when necessary.",
+    "Vicky is a blessing to our society, offering access to a high-quality mental health program for those who cannot afford a specialist and for those seeking personal growth.",
+    "Welcome to a future of well-being and progress."
+];
 export default function Vicky() {
     const { data: session, status } = useSession()
     const [selectedLanguage, setSelectedLanguage] = useState('en-US');
@@ -35,12 +50,22 @@ export default function Vicky() {
                                 <Text variant="h2" className="text-2xl md:text-5xl text-slate-900/80 font-medium mb-4">
                                     Welcome, {session?.user?.name}
                                 </Text>)}
-                            <Text
-                                leading="relaxed"
-                                variant='p'
-                                className="text-base text-slate-700/75 space-y-2">
-                                Welcome to the Future of Mental Health Care with Vicky AI! Vicky is a unique blend of artificial intelligence and empathy, providing 24/7 emotional and mental support. We are revolutionizing mental health care by making personalized therapy accessible to all, regardless of financial constraints. Vicky is an adaptable AI, constantly learning and growing to offer unique and effective support. She is the compassionate companion and accessible resource that contributes to a healthier and more balanced world. Join us on this transformative journey towards a brighter future with Vicky AI. Your well-being is our priority.
+                            <Text variant="h2" className="text-xl md:text-3xl text-slate-900/80 font-medium mb-4">
+                                Imagine a Future of Well-being and Progress
                             </Text>
+                            <div className="">
+                                {textArray.map((paragraph, index) => (
+                                    <Text
+                                        key={index}
+                                        leading="relaxed"
+                                        variant="p"
+                                        className="text-sm text-slate-700/75 space-y-2 font-medium"
+                                    >
+                                        <ArrowRightIcon className="inline-block mr-2 w-4 h-4 text-slate-900" />
+                                        {paragraph}
+                                    </Text>
+                                ))}
+                            </div>
                         </div>
                         <div className="absolute bottom-4 right-3 hover:rotate-1 duration-500 cursor-pointer transition-all ease-in-out w-1/5">
                             <Image
@@ -155,4 +180,3 @@ export default function Vicky() {
         </div>
     )
 }
-
