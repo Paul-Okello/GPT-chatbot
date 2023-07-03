@@ -21,7 +21,11 @@ export const useSpeechCapture = () => {
 
     recognition.onerror = (event) => {
       console.error('Speech recognition error:', event.error);
+      setIsListening(false);
     };
+
+    // Set language to Spanish
+    recognition.lang = 'es-ES';
 
     recognition.start();
   };

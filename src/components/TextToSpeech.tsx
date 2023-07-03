@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Text } from '@rewind-ui/core';
 import { useSpeechCapture } from '@/hooks/useSpeechCapture';
 import { SegmentItem } from './SegmentItem';
+import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 
 export default function TextToSpeech() {
     const { capturedSpeech, isListening, startSpeechCapture, stopSpeechCapture } = useSpeechCapture();
@@ -34,9 +35,10 @@ export default function TextToSpeech() {
     return (
         <div className="p-5 flex flex-col">
             <div>
-                {isProcessing ? (
-                    <div className="flex justify-center items-center my-4">
+                {isListening ? (
+                    <div className="flex flex-col justify-center items-center my-4">
                         <Spinner size="lg" color="gray.500" />
+                        <Text weight="normal">Listening</Text>
                     </div>
                 ) : (
                     <SegmentItem segment={transcript} />
@@ -78,7 +80,10 @@ export default function TextToSpeech() {
                     Instructions
                 </Text>
                 {instructions.map((instruction, index) => (
-                    <li className="" key={index}>
+                    <li className="flex" key={index}>
+                        <div className="mr-2">
+                            <CheckBadgeIcon className='text-[#684184] h-7 w-7' />
+                        </div>
                         <Text weight="normal">{instruction}</Text>
                     </li>
                 ))}

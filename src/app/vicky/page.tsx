@@ -1,6 +1,6 @@
 "use client"
 
-import { SpeechCaptureComponent, Talkify, TextToSpeech } from "@/components";
+import { Talkify, TextToSpeech } from "@/components";
 import { populateVoiceList, sayInput } from '@/lib/voiceUtils';
 import { useAppSelector } from '@/redux/hooks';
 import { Button, ButtonGroup } from '@chakra-ui/react';
@@ -30,7 +30,7 @@ export default function Vicky() {
     const { data: session, status } = useSession()
     const [selectedLanguage, setSelectedLanguage] = useState('en-US');
     const contentData = useAppSelector((state) => state.content);
-    const { isListening, } = useSpeechCapture();
+    const { isListening } = useSpeechCapture();
 
     useEffect(() => {
         populateVoiceList();
@@ -69,9 +69,9 @@ export default function Vicky() {
                         </div>
                         <div className="absolute bottom-4 right-3 hover:rotate-1 duration-500 cursor-pointer transition-all ease-in-out w-1/5">
                             <Image
-                                src="/assets/poor.jpeg"
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
                                 width={200}
-                                className="hidden lg:block"
+                                className="hidden lg:block rounded-lg"
                                 height={350}
                                 alt="Vicky"
                             />
@@ -81,9 +81,6 @@ export default function Vicky() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-3 p-3 auto-cols-max">
                     <Card className='w-full'>
                         <Card.Header className='relative'>
-                            <Ribbon color={`${isListening ? "purple" : "gray"}`} radius="md" shadow="none">
-                                {isListening ? "Listening" : "Not Listening"}
-                            </Ribbon>
                             <Text variant="d4">VICKY</Text>
                         </Card.Header>
                         <Card.Body>
