@@ -57,7 +57,9 @@ const FAQSection = () => {
             <Card bg={"white"} className='p-4 grid grid-cols-1 lg:grid-cols-2 my-4'>
                 {advantages.map((advantage, index) => (
                     <div className="flex justify-start items-center" key={index}>
-                        <CheckBadgeIcon className='text-[#684184] h-7 w-7' />
+                        <div className="mx-1">
+                            <CheckBadgeIcon className='text-[#684184] h-5 w-5' />
+                        </div>
                         <p key={index} className="text-slate-800 text-lg">
                             {advantage}
                         </p>

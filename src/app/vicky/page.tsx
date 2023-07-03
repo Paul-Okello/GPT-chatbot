@@ -44,7 +44,7 @@ export default function Vicky() {
         <div className="bg-slate-100 min-h-screen">
             <main className="max-w-7xl mx-auto py-6">
                 <div className="mx-auto p-3">
-                    <Card className="relative p-5  gap-2">
+                    <Card className="relative p-5 gap-2 shadow-lg">
                         <div className="w-4/5">
                             {status === "authenticated" && (
                                 <Text variant="h2" className="text-2xl md:text-5xl text-slate-900/80 font-medium mb-4">
@@ -79,7 +79,7 @@ export default function Vicky() {
                     </Card>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-3 p-3 auto-cols-max">
-                    <Card className='w-full'>
+                    <Card className='w-full shadow-lg'>
                         <Card.Header className='relative'>
                             <Text variant="d4">VICKY</Text>
                         </Card.Header>
@@ -88,7 +88,7 @@ export default function Vicky() {
                             <TextToSpeech />
                         </Card.Body>
                     </Card>
-                    <Card className='col-span-2'>
+                    <Card className='col-span-2 shadow-lg'>
                         <Card.Header className='relative'>
                             <Ribbon color={`${contentData.loading ? "gray" : "purple"}`} radius="md" shadow="none">
                                 {contentData.loading ? "AWAITING THE DATA" : "PROFESSIONAL THERAPY CENTER"}

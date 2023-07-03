@@ -68,10 +68,9 @@ export default function TextToSpeech() {
                     )}
                 </Button>
             </div>
-            <ol className="">
+            <ol className="border rounded-md border-slate-500 p-1">
                 <Text
                     className="my-2"
-                    color="black"
                     leading="loose"
                     size="lg"
                     tracking="tight"
@@ -80,9 +79,9 @@ export default function TextToSpeech() {
                     Instructions
                 </Text>
                 {instructions.map((instruction, index) => (
-                    <li className="flex" key={index}>
+                    <li className="flex justify-center items-center" key={index}>
                         <div className="mr-2">
-                            <CheckBadgeIcon className='text-[#684184] h-7 w-7' />
+                            <CheckBadgeIcon className='text-[#684184] h-5 w-5' />
                         </div>
                         <Text weight="normal">{instruction}</Text>
                     </li>
