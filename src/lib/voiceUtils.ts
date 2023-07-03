@@ -5,6 +5,7 @@ const synth = typeof window !== 'undefined' && window.speechSynthesis;
 export const populateVoiceList = () => {
   try {
     let voices = synth.getVoices();
+    console.log("voices", voices);
 
     return voices.sort((a: any, b: any) => a.name.localeCompare(b.name));
   } catch (err) {

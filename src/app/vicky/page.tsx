@@ -1,16 +1,16 @@
 "use client"
 
-import { Talkify, TextToSpeech } from "@/components";
+import { SpeechCaptureComponent, Talkify, TextToSpeech } from "@/components";
 import { populateVoiceList, sayInput } from '@/lib/voiceUtils';
 import { useAppSelector } from '@/redux/hooks';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { Card, Ribbon, Select, Text } from '@rewind-ui/core';
-import { useSpeechContext } from '@speechly/react-client';
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from 'react';
 import { RotateLoader } from 'react-spinners';
+import { useSpeechCapture } from '@/hooks/useSpeechCapture';
 
 const textArray = [
     "Imagine having an emotional conflict and being cared for by renowned figures such as Freud, Lacan, Pinker, Jung, Ekman, or Maslow.",
@@ -29,8 +29,8 @@ const textArray = [
 export default function Vicky() {
     const { data: session, status } = useSession()
     const [selectedLanguage, setSelectedLanguage] = useState('en-US');
-    const { listening } = useSpeechContext();
     const contentData = useAppSelector((state) => state.content);
+    const { isListening, } = useSpeechCapture();
 
     useEffect(() => {
         populateVoiceList();
@@ -81,8 +81,8 @@ export default function Vicky() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-3 p-3 auto-cols-max">
                     <Card className='w-full'>
                         <Card.Header className='relative'>
-                            <Ribbon color={`${listening ? "purple" : "gray"}`} radius="md" shadow="none">
-                                {listening ? "Listening" : "Not Listening"}
+                            <Ribbon color={`${isListening ? "purple" : "gray"}`} radius="md" shadow="none">
+                                {isListening ? "Listening" : "Not Listening"}
                             </Ribbon>
                             <Text variant="d4">VICKY</Text>
                         </Card.Header>

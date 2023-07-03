@@ -1,17 +1,14 @@
-"use client"
-import { useSpeechContext } from '@speechly/react-client';
 import { useEffect, useState } from 'react';
-import { Button } from '@chakra-ui/react';
-import { SegmentItem } from './SegmentItem';
+import { Button, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Text } from '@rewind-ui/core';
-import Talkify from './Talkify';
+import { useSpeechCapture } from '@/hooks/useSpeechCapture';
+import { SegmentItem } from './SegmentItem';
 
 export default function TextToSpeech() {
-    const { segment, listening, attachMicrophone, start, stop } = useSpeechContext();
-    type SegmentProps = typeof segment
-    const [transcripts, setTranscripts] = useState<SegmentProps[]>([])
-    const [tentative, setTentative] = useState<string>('')
+    const { capturedSpeech, isListening, startSpeechCapture, stopSpeechCapture } = useSpeechCapture();
+    const [transcript, setTranscript] = useState('');
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const instructions = [
         "To engage with Vicky AI, make sure your microphone is activated.",
@@ -19,31 +16,31 @@ export default function TextToSpeech() {
         "When you're finished, remember to close the microphone."
     ];
 
-
-    const handleClick = async () => {
-        if (listening) {
-            await stop();
+    const handleClick = () => {
+        if (isListening) {
+            stopSpeechCapture();
         } else {
-            await attachMicrophone();
-            await start();
+            startSpeechCapture();
         }
     };
 
     useEffect(() => {
-        if (segment) {
-            const transcript = segment.words.map((word) => word.value).join(' ');
-            setTentative(transcript);
-            if (segment.isFinal) {
-                setTentative('');
-                setTranscripts((current) => [...current, segment]);
-            }
+        if (capturedSpeech) {
+            setTranscript(capturedSpeech);
+            setIsProcessing(!isListening);
         }
-    }, [segment])
+    }, [capturedSpeech, isListening]);
 
     return (
         <div className="p-5 flex flex-col">
             <div>
-                {segment && <SegmentItem segment={segment} />}
+                {isProcessing ? (
+                    <div className="flex justify-center items-center my-4">
+                        <Spinner size="lg" color="gray.500" />
+                    </div>
+                ) : (
+                    <SegmentItem segment={transcript} />
+                )}
             </div>
             <div className="flex justify-center items-center my-4">
                 <Button
@@ -62,19 +59,16 @@ export default function TextToSpeech() {
                     }}
                     onClick={handleClick}
                 >
-                    {listening ? (
-                        <Image
-                            src="/assets/icons8-off.svg" fill alt="start"
-                        />
+                    {isListening ? (
+                        <Image src="/assets/icons8-off.svg" fill alt="start" />
                     ) : (
-                        <Image
-                            src="/assets/icons8-on.svg" fill alt="start"
-                        />)
-                    }
+                        <Image src="/assets/icons8-on.svg" fill alt="start" />
+                    )}
                 </Button>
             </div>
             <ol className="">
-                <Text className='my-2'
+                <Text
+                    className="my-2"
                     color="black"
                     leading="loose"
                     size="lg"
@@ -90,5 +84,5 @@ export default function TextToSpeech() {
                 ))}
             </ol>
         </div>
-    )
+    );
 }

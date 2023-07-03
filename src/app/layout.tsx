@@ -22,18 +22,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Providers>
-          <SessionProvider>
-            <Provider store={store}>
-              <SpeechProvider
-                appId={process.env.NEXT_PUBLIC_SPEECHLY_APP_ID}
-              >
+        <SpeechProvider
+          appId={process.env.NEXT_PUBLIC_SPEECHLY_APP_ID}
+          debug
+          logSegments
+          vad={{ enabled: false }}
+        >
+          <Providers>
+            <SessionProvider>
+              <Provider store={store}>
                 <Navbar />
                 {children}
-              </SpeechProvider>
-            </Provider>
-          </SessionProvider>
-        </Providers>
+              </Provider>
+            </SessionProvider>
+          </Providers>
+        </SpeechProvider>
       </body>
     </html>
   )

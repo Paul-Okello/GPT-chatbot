@@ -1,16 +1,15 @@
 "use client"
 
 import React, { useEffect, useState, useCallback } from 'react';
-import { SpeechSegment } from '@speechly/react-client';
-import formatDuration from 'format-duration';
-import { Text } from '@rewind-ui/core';
-import { useToast } from '@chakra-ui/react';
+import { Spinner, useToast } from '@chakra-ui/react';
 import getBasePath from '@/lib/getBasePath';
 import { useAppDispatch } from '@/redux/hooks';
 import { setContent, setError } from '@/redux/slices/content-slice';
+import { useSpeechCapture } from '@/hooks/useSpeechCapture';
+import { Text } from '@rewind-ui/core';
 
 interface Props {
-    segment: SpeechSegment;
+    segment: string;
 }
 
 export interface GPTResponse {
@@ -19,49 +18,48 @@ export interface GPTResponse {
 }
 
 export const SegmentItem: React.FC<Props> = ({ segment }) => {
-    const text = segment.words.map((w) => w.value).join(' ');
-    const timestamp = formatDuration(segment.words[segment.words.length - 1].endTimestamp);
-    const chakraToast = useToast();
+    const text = segment;
     const [gptData, setGptData] = useState<GPTResponse>({});
     const dispatch = useAppDispatch();
+    const { capturedSpeech, isListening } = useSpeechCapture();
+    const [isProcessing, setIsProcessing] = useState(false);
+    const toast = useToast();
 
-    const placeTextInObject = useCallback((text: string) => {
-        const words = text.split(' ');
+    const placeTextInObject = useCallback(
+        (text: string) => {
+            const words = text.split(' ');
 
-        if (segment.isFinal) {
-            if (words.length >= 5) {
-                chakraToast({
-                    title: 'Vicky is Processing your request',
-                    description: 'Please wait for a few seconds',
-                    status: 'info',
-                    duration: 5000,
-                    isClosable: true,
-                });
-                return { text };
-            } else {
-                chakraToast({
-                    title: 'Try Again',
-                    description: 'Text must contain at least 5 words.',
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                });
+            if (!isListening) {
+                if (words.length >= 5) {
+                    setIsProcessing(true);
+                    return { text };
+                }
             }
-        }
-    }, [chakraToast, segment.isFinal]);
+        },
+        [isListening]
+    );
 
     useEffect(() => {
         const dataToSend = placeTextInObject(text);
 
         async function getGPTResponse() {
             if (dataToSend) {
+                toast({
+                    title: 'Sending...',
+                    status: 'info',
+                    duration: 6000,
+                    isClosable: true,
+                    position: 'top-right',
+                    description: 'Vicky is working on your request.',
+                });
+
                 const res = await fetch(`${getBasePath()}/api/getTherapySummary`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        text: dataToSend,
+                        text: dataToSend.text,
                     }),
                 });
 
@@ -73,20 +71,33 @@ export const SegmentItem: React.FC<Props> = ({ segment }) => {
                 const { content } = GPTdata;
                 setGptData({ content });
                 dispatch(setContent(GPTdata));
+                setIsProcessing(false);
+
+                toast({
+                    title: 'Response sent!',
+                    description: 'Your request has been worked on.',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                    position: 'top-right',
+                });
             }
         }
 
         getGPTResponse();
-    }, [segment, text, dispatch, placeTextInObject]);
+    }, [text, dispatch, placeTextInObject, toast]);
 
     return (
         <div className="segment border rounded-md p-3 flex justify-start items-center">
-            <Text className="text-indigo-700/80 mx-2" size="base">
-                {timestamp}
-            </Text>
             <Text className="text-indigo-700/80" leading="relaxed" size="lg" tracking="tight" weight="semiBold">
                 {text}
             </Text>
+            {isListening && <Spinner size="sm" ml={2} />}
+            {!isListening && capturedSpeech && !isProcessing && (
+                <Text className="text-indigo-700/80" leading="relaxed" size="lg" tracking="tight" weight="semiBold">
+                    {capturedSpeech}
+                </Text>
+            )}
         </div>
     );
 };
