@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from 'react';
 import { Button, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';

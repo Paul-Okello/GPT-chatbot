@@ -1,10 +1,10 @@
 "use client"
 
 import getBasePath from '@/lib/getBasePath';
-import { populateVoiceList, sayInput } from '@/lib/voiceUtils';
+import { populateVoiceList } from '@/lib/voiceUtils';
 import { useAppDispatch } from '@/redux/hooks';
 import { setContent, setError } from '@/redux/slices/content-slice';
-import { Box, ButtonGroup, FormControl, useToast, } from '@chakra-ui/react';
+import { Box, FormControl, useToast } from '@chakra-ui/react';
 import { Card, Text, Textarea, Button } from '@rewind-ui/core';
 import { useCallback, useEffect, useState } from 'react';
 import { GPTResponse } from './SegmentItem';

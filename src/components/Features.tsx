@@ -7,12 +7,11 @@ import {
     Flex,
     Heading,
     Stack,
-    Text, Button
+    Text
 } from '@chakra-ui/react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import Link from 'next/link';
 
 export default function Features() {
     const controls = useAnimation();
@@ -87,17 +86,6 @@ export default function Features() {
                         professional growth merge into a path of self-discovery towards a full
                         and balanced life.
                     </Text>
-                    {/* <div className='flex justify-start items-center rounded-full w-full mt-5'>
-                        <Link href={"/vicky"}>
-                            <Button
-                                variant='solid'
-                                size='sm'
-                                className='bg-[#684184] hover:bg-[#705b7e] text-base text-white'>
-                                JOIN US AND START LIVING
-                                LIFE TODAY!
-                            </Button>
-                        </Link>
-                    </div> */}
                 </Stack>
                 <Flex>
                     <Image

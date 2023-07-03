@@ -3,14 +3,11 @@
 import {
     Box,
     chakra,
-    Container,
-    Link,
-    Stack,
+    Container, Stack,
     Text,
     useColorModeValue,
-    VisuallyHidden,
+    VisuallyHidden
 } from '@chakra-ui/react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { ReactNode } from 'react';
 import { EnvelopeIcon, GlobeAltIcon, PhoneIcon } from '@heroicons/react/24/outline';
 

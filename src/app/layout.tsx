@@ -5,7 +5,6 @@ import { Montserrat } from 'next/font/google'
 import { Providers } from './providers'
 import { Navbar } from '@/components'
 import { SessionProvider } from "next-auth/react"
-import { SpeechProvider } from '@speechly/react-client'
 import { Provider } from 'react-redux'
 import { store } from '@/redux/store'
 
@@ -22,21 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <SpeechProvider
-          appId={process.env.NEXT_PUBLIC_SPEECHLY_APP_ID}
-          debug
-          logSegments
-          vad={{ enabled: false }}
-        >
-          <Providers>
-            <SessionProvider>
-              <Provider store={store}>
-                <Navbar />
-                {children}
-              </Provider>
-            </SessionProvider>
-          </Providers>
-        </SpeechProvider>
+        <Providers>
+          <SessionProvider>
+            <Provider store={store}>
+              <Navbar />
+              {children}
+            </Provider>
+          </SessionProvider>
+        </Providers>
       </body>
     </html>
   )

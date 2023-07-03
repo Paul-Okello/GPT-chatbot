@@ -1,10 +1,6 @@
 "use client"
 
-import { FAQSection, Features, Footer, Hero } from '@/components'
-import { useToast } from '@chakra-ui/react';
-import { useSession } from 'next-auth/react';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { FAQSection, Features, Footer, Hero } from '@/components';
 
 export default function Home() {
 
